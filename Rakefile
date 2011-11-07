@@ -11,7 +11,7 @@ begin
       :author       => %q{Jens Wille},
       :email        => %q{jens.wille@uni-koeln.de},
       :homepage     => :blackwinter,
-      :dependencies => %w[RMagick ruby-filemagic ruby-nuggets apache_secure_download]
+      :dependencies => %w[rmagick ruby-filemagic ruby-nuggets apache_secure_download]
     }
   }}
 rescue LoadError => err

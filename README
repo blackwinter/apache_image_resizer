@@ -1,0 +1,70 @@
+= apache_image_resizer - Apache module providing image resizing functionality.
+
+== VERSION
+
+This documentation refers to apache_image_resizer version 0.0.1
+
+
+== DESCRIPTION
+
+Place the following snippet in your Apache config:
+
+  <IfModule mod_ruby.c>
+    RubyRequire apache/ruby-run
+
+    RubyRequire /path/to/apache_image_resizer
+    # or
+    #RubyRequire rubygems
+    #RubyRequire apache/image_resizer
+
+    <Location /image_resizer>
+      SetHandler ruby-object
+      RubyHandler "Apache::ImageResizer.new"
+    </Location>
+
+    <Directory /path/to/images>
+      ErrorDocument 404 /image_resizer
+    </Directory>
+  </IfModule>
+
+Expected filesystem layout and URLs:
+
+  /images/bla/original/blob/blub_42-23.jpg
+   `-- base
+          `-- prefix
+              `-- source directory
+                       `-- path --------->
+
+  /$BASE/$PREFIX/r42x23/$PATH
+                 `-- directives
+
+
+== LINKS
+
+<b></b>
+Documentation:: http://blackwinter.github.com/apache_image_resizer
+Source code::   http://github.com/blackwinter/apache_image_resizer
+
+
+== AUTHORS
+
+* Jens Wille <mailto:jens.wille@uni-koeln.de>
+
+
+== LICENSE AND COPYRIGHT
+
+Copyright (C) 2011 University of Cologne,
+Albertus-Magnus-Platz, 50923 Cologne, Germany
+
+apache_image_resizer is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.
+
+apache_image_resizer is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License
+for more details.
+
+You should have received a copy of the GNU Affero General Public License along
+with apache_image_resizer. If not, see <http://www.gnu.org/licenses/>.

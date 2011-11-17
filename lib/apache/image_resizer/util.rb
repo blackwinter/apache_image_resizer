@@ -149,12 +149,11 @@ module Apache
         match, directives, max = Regexp.last_match, {}, @max_dim
 
         if o = match[3]
-          h, *xy = match.values_at(4, 5, 6)
+          wh = [o.to_f, match[4].to_f]
+          xy = match.values_at(5, 6)
 
-          if (args = [o.to_f, h.to_f]).all? { |i| i <= max }
-            directives[:offset] = xy.map! { |i|
-              i.tr!('pm', '+-').to_f
-            }.concat(args)
+          if wh.all? { |i| 0 < i && i <= max }
+            directives[:offset] = xy.map! { |i| i.tr!('pm', '+-').to_f }.concat(wh)
           else
             return
           end
@@ -163,13 +162,13 @@ module Apache
         if w = match[1]
           h = match[2]
 
-          args = [w.to_f]
-          args << h.to_f if h
+          wh = [w.to_f]
+          wh << h.to_f if h
 
           max *= 2 if o
 
-          if args.all? { |i| i <= max }
-            directives[:resize] = args
+          if wh.all? { |i| 0 < i && i <= max }
+            directives[:resize] = wh
           else
             return
           end

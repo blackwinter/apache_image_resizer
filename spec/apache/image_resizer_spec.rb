@@ -44,6 +44,22 @@ describe Apache::ImageResizer do
       @uri %= 'r10000'
     end
 
+    it_should :decline, 'Zero width', 'Invalid Directives' do
+      @uri %= 'r0x100'
+    end
+
+    it_should :decline, 'Zero height', 'Invalid Directives' do
+      @uri %= 'r100x0'
+    end
+
+    it_should :decline, 'Zero width offset', 'Invalid Directives' do
+      @uri %= 'o0x100p0p0'
+    end
+
+    it_should :decline, 'Zero height offset', 'Invalid Directives' do
+      @uri %= 'o100x0p0p0'
+    end
+
     it_should :decline, 'Read Error: Magick::ImageMagickError' do
       mock_uri(path = '/source-path')
 

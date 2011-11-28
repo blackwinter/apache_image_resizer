@@ -2,17 +2,17 @@
 
 Gem::Specification.new do |s|
   s.name = "apache_image_resizer"
-  s.version = "0.0.4"
+  s.version = "0.0.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jens Wille"]
-  s.date = "2011-11-17"
+  s.date = "2011-11-28"
   s.description = "Apache module providing image resizing functionality."
   s.email = "jens.wille@uni-koeln.de"
   s.extra_rdoc_files = ["README", "COPYING", "ChangeLog"]
   s.files = ["lib/apache/image_resizer.rb", "lib/apache/mock_constants.rb", "lib/apache/image_resizer/util.rb", "lib/apache/image_resizer/version.rb", "ChangeLog", "COPYING", "README", "Rakefile", "spec/apache/image_resizer_spec.rb", "spec/apache/image_resizer/util_spec.rb", "spec/spec_helper.rb", ".rspec"]
   s.homepage = "http://github.com/blackwinter/apache_image_resizer"
-  s.rdoc_options = ["--title", "apache_image_resizer Application documentation (v0.0.4)", "--line-numbers", "--main", "README", "--all", "--charset", "UTF-8"]
+  s.rdoc_options = ["--title", "apache_image_resizer Application documentation (v0.0.5)", "--line-numbers", "--main", "README", "--all", "--charset", "UTF-8"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.11"
   s.summary = "Apache module providing image resizing functionality."

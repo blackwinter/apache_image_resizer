@@ -213,17 +213,22 @@ module Apache
         } or return
 
         resize, offset = directives.values_at(:resize, :offset)
+        link = !offset
 
         if resize
+          c, r = img.columns, img.rows
+
           w, h = resize
           h  ||= DEFAULT_HEIGHT
 
           unless enlarge || offset
-            w = [w, img.columns].min
-            h = [h, img.rows   ].min
+            w = [w, c].min
+            h = [h, r].min
           end
 
           img.resize_to_fit!(w, h)
+
+          link &&= img.columns == c && img.rows == r
         end
 
         if offset
@@ -231,6 +236,14 @@ module Apache
         end
 
         mkdir_for(target)
+
+        if link
+          if system('ln', source, target)
+            return img
+          elsif block
+            block['Link error: %s' % $?.exitstatus]
+          end
+        end
 
         do_magick('Write', target, block) { |value|
           img.write(value) or raise Magick::ImageMagickError

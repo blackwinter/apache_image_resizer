@@ -70,6 +70,8 @@ module Apache
       DEFAULT_PROXY_CACHE = 'proxy_cache'
       DEFAULT_FORMAT      = 'jpeg:'
 
+      MIME_RE = %r{\Aimage/}i
+
       dimension_pattern = %q{\d+(?:\.\d+)?}
 
       DIRECTIVES_RE = %r{
@@ -191,7 +193,7 @@ module Apache
 
         begin
           URI.get_redirect(source) { |res|
-            if res.is_a?(Net::HTTPSuccess)
+            if res.is_a?(Net::HTTPSuccess) && res.content_type =~ MIME_RE
               content = res.body.untaint
 
               mkdir_for(cache)

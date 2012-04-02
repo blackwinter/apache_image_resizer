@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Module: Apache::ImageResizer::Util</title>
+<title>module Apache::ImageResizer::Util - apache_image_resizer Application documentation (v0.0.6)</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -188,6 +188,11 @@
         <dd class="description">
         
       
+        <dt id="MIME_RE">MIME_RE
+        
+        <dd class="description">
+        
+      
         <dt id="PROXY_RE">PROXY_RE
         
         <dd class="description">
@@ -226,18 +231,17 @@
 
           
           <div class="method-source-code" id="extract_directives-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 147</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 149</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">extract_directives</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-constant">DIRECTIVES_RE</span>, <span class="ruby-string">''</span>)
   <span class="ruby-identifier">match</span>, <span class="ruby-identifier">directives</span>, <span class="ruby-identifier">max</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">last_match</span>, {}, <span class="ruby-ivar">@max_dim</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">o</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">3</span>]
-    <span class="ruby-identifier">h</span>, *<span class="ruby-identifier">xy</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">4</span>, <span class="ruby-value">5</span>, <span class="ruby-value">6</span>)
+    <span class="ruby-identifier">wh</span> = [<span class="ruby-identifier">o</span>.<span class="ruby-identifier">to_f</span>, <span class="ruby-identifier">match</span>[<span class="ruby-value">4</span>].<span class="ruby-identifier">to_f</span>]
+    <span class="ruby-identifier">xy</span> = <span class="ruby-identifier">match</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">5</span>, <span class="ruby-value">6</span>)
 
-    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">args</span> = [<span class="ruby-identifier">o</span>.<span class="ruby-identifier">to_f</span>, <span class="ruby-identifier">h</span>.<span class="ruby-identifier">to_f</span>]).<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">max</span> }
-      <span class="ruby-identifier">directives</span>[<span class="ruby-value">:offset</span>] = <span class="ruby-identifier">xy</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">i</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">'pm'</span>, <span class="ruby-string">'+-'</span>).<span class="ruby-identifier">to_f</span>
-      }.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">args</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">wh</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-value">0</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">max</span> }
+      <span class="ruby-identifier">directives</span>[<span class="ruby-value">:offset</span>] = <span class="ruby-identifier">xy</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">'pm'</span>, <span class="ruby-string">'+-'</span>).<span class="ruby-identifier">to_f</span> }.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">wh</span>)
     <span class="ruby-keyword">else</span>
       <span class="ruby-keyword">return</span>
     <span class="ruby-keyword">end</span>
@@ -246,13 +250,13 @@
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">w</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>]
     <span class="ruby-identifier">h</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">2</span>]
 
-    <span class="ruby-identifier">args</span> = [<span class="ruby-identifier">w</span>.<span class="ruby-identifier">to_f</span>]
-    <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span>
+    <span class="ruby-identifier">wh</span> = [<span class="ruby-identifier">w</span>.<span class="ruby-identifier">to_f</span>]
+    <span class="ruby-identifier">wh</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span>
 
     <span class="ruby-identifier">max</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">o</span>
 
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">max</span> }
-      <span class="ruby-identifier">directives</span>[<span class="ruby-value">:resize</span>] = <span class="ruby-identifier">args</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">wh</span>.<span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-value">0</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">max</span> }
+      <span class="ruby-identifier">directives</span>[<span class="ruby-value">:resize</span>] = <span class="ruby-identifier">wh</span>
     <span class="ruby-keyword">else</span>
       <span class="ruby-keyword">return</span>
     <span class="ruby-keyword">end</span>
@@ -286,7 +290,7 @@
 
           
           <div class="method-source-code" id="get_paths-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 181</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">get_paths</span>(<span class="ruby-identifier">request</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">base</span>, <span class="ruby-identifier">prefix</span>, <span class="ruby-identifier">source_dir</span>, <span class="ruby-identifier">target_dir</span>, <span class="ruby-identifier">proxy_cache</span>, <span class="ruby-identifier">secret</span>)
   <span class="ruby-identifier">real_base</span> = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">lookup_uri</span>(<span class="ruby-identifier">base</span>).<span class="ruby-identifier">filename</span>.<span class="ruby-identifier">untaint</span>
   <span class="ruby-identifier">target</span>    = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">real_base</span>, <span class="ruby-identifier">prefix</span>, <span class="ruby-identifier">target_dir</span>, <span class="ruby-identifier">path</span>).<span class="ruby-identifier">untaint</span>
@@ -301,7 +305,7 @@
 
   <span class="ruby-keyword">begin</span>
     <span class="ruby-constant">URI</span>.<span class="ruby-identifier">get_redirect</span>(<span class="ruby-identifier">source</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">res</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPSuccess</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPSuccess</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">MIME_RE</span>
         <span class="ruby-identifier">content</span> = <span class="ruby-identifier">res</span>.<span class="ruby-identifier">body</span>.<span class="ruby-identifier">untaint</span>
 
         <span class="ruby-identifier">mkdir_for</span>(<span class="ruby-identifier">cache</span>)
@@ -342,7 +346,7 @@
 
           
           <div class="method-source-code" id="parse_url-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 129</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_url</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">base</span>, <span class="ruby-identifier">prefix_re</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">block</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span>*<span class="ruby-operator">|</span> }
 
@@ -386,24 +390,29 @@
 
           
           <div class="method-source-code" id="resize-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 211</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 212</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">directives</span>, <span class="ruby-identifier">enlarge</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">img</span> = <span class="ruby-identifier">do_magick</span>(<span class="ruby-string">'Read'</span>, <span class="ruby-identifier">source</span>, <span class="ruby-identifier">block</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">Image</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">value</span>).<span class="ruby-identifier">first</span>
   } <span class="ruby-keyword">or</span> <span class="ruby-keyword">return</span>
 
   <span class="ruby-identifier">resize</span>, <span class="ruby-identifier">offset</span> = <span class="ruby-identifier">directives</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">:resize</span>, <span class="ruby-value">:offset</span>)
+  <span class="ruby-identifier">link</span> = <span class="ruby-operator">!</span><span class="ruby-identifier">offset</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">resize</span>
+    <span class="ruby-identifier">c</span>, <span class="ruby-identifier">r</span> = <span class="ruby-identifier">img</span>.<span class="ruby-identifier">columns</span>, <span class="ruby-identifier">img</span>.<span class="ruby-identifier">rows</span>
+
     <span class="ruby-identifier">w</span>, <span class="ruby-identifier">h</span> = <span class="ruby-identifier">resize</span>
     <span class="ruby-identifier">h</span>  <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_HEIGHT</span>
 
     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">enlarge</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">offset</span>
-      <span class="ruby-identifier">w</span> = [<span class="ruby-identifier">w</span>, <span class="ruby-identifier">img</span>.<span class="ruby-identifier">columns</span>].<span class="ruby-identifier">min</span>
-      <span class="ruby-identifier">h</span> = [<span class="ruby-identifier">h</span>, <span class="ruby-identifier">img</span>.<span class="ruby-identifier">rows</span>   ].<span class="ruby-identifier">min</span>
+      <span class="ruby-identifier">w</span> = [<span class="ruby-identifier">w</span>, <span class="ruby-identifier">c</span>].<span class="ruby-identifier">min</span>
+      <span class="ruby-identifier">h</span> = [<span class="ruby-identifier">h</span>, <span class="ruby-identifier">r</span>].<span class="ruby-identifier">min</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">img</span>.<span class="ruby-identifier">resize_to_fit!</span>(<span class="ruby-identifier">w</span>, <span class="ruby-identifier">h</span>)
+
+    <span class="ruby-identifier">link</span> <span class="ruby-operator">&amp;&amp;=</span> <span class="ruby-identifier">img</span>.<span class="ruby-identifier">columns</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">img</span>.<span class="ruby-identifier">rows</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">r</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">offset</span>
@@ -411,6 +420,14 @@
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">mkdir_for</span>(<span class="ruby-identifier">target</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">link</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">system</span>(<span class="ruby-string">'ln'</span>, <span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">img</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">block</span>
+      <span class="ruby-identifier">block</span>[<span class="ruby-string">'Link error: %s'</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">$?</span>.<span class="ruby-identifier">exitstatus</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">do_magick</span>(<span class="ruby-string">'Write'</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">block</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">img</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">value</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">ImageMagickError</span>
@@ -445,16 +462,16 @@
 
           
           <div class="method-source-code" id="resize_url-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 107</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 109</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resize_url</span>(<span class="ruby-identifier">size</span> = <span class="ruby-constant">DEFAULT_SOURCE_DIR</span>, *<span class="ruby-identifier">path</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">size</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>  <span class="ruby-keyword">then</span> <span class="ruby-keyword">nil</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">Numeric</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">size</span> = <span class="ruby-node">&quot;r#{size}&quot;</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>   <span class="ruby-keyword">then</span> <span class="ruby-identifier">size</span> = <span class="ruby-node">&quot;r#{size.join('x')}&quot;</span>
     <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>    <span class="ruby-keyword">then</span> <span class="ruby-identifier">size</span> = <span class="ruby-identifier">size</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-keyword">case</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A[rs]/</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r\A[rs]/</span>
         <span class="ruby-node">&quot;r#{Array(v).join('x')}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\Ao/</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-regexp">%r\Ao/</span>
         <span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span>, <span class="ruby-identifier">w</span>, <span class="ruby-identifier">h</span> = <span class="ruby-identifier">v</span>
         <span class="ruby-node">&quot;o#{w}x#{h}#{x &lt; 0 ? 'm' : 'p'}#{x.abs}#{y &lt; 0 ? 'm' : 'p'}#{y.abs}&quot;</span>
     <span class="ruby-keyword">end</span> }.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>
@@ -493,7 +510,7 @@
 
           
           <div class="method-source-code" id="secure_resize_url-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 103</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">secure_resize_url</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">args</span> = [], <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">resize_url</span>(*<span class="ruby-identifier">args</span>), <span class="ruby-identifier">secret</span>, <span class="ruby-identifier">options</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -523,7 +540,7 @@
 
           
           <div class="method-source-code" id="send_image-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 244</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 258</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">send_image</span>(<span class="ruby-identifier">request</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">img</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">target</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">request</span>.<span class="ruby-identifier">content_type</span> = (<span class="ruby-identifier">t</span> = <span class="ruby-identifier">img</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">img</span>.<span class="ruby-identifier">format</span>) <span class="ruby-operator">?</span>
@@ -568,7 +585,7 @@
 
           
           <div class="method-source-code" id="do_magick-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 259</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 273</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">do_magick</span>(<span class="ruby-identifier">what</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">yield</span> <span class="ruby-identifier">value</span>
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Magick</span><span class="ruby-operator">::</span><span class="ruby-constant">ImageMagickError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">err</span>
@@ -605,7 +622,7 @@
 
           
           <div class="method-source-code" id="log-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 285</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 299</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">log</span>(<span class="ruby-identifier">level</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">loc</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">trace</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@verbosity</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">level</span>
 
@@ -644,7 +661,7 @@
 
           
           <div class="method-source-code" id="log_err-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 279</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 293</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">log_err</span>(<span class="ruby-identifier">err</span>, <span class="ruby-identifier">msg</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">log</span>(<span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-identifier">err</span>.<span class="ruby-identifier">backtrace</span>) {
     <span class="ruby-node">&quot;[ERROR] #{&quot;#{msg}: &quot; if msg}#{err} (#{err.class})&quot;</span>
@@ -676,7 +693,7 @@
 
           
           <div class="method-source-code" id="mkdir_for-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 270</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 284</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">mkdir_for</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">untaint</span>
   <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span>(<span class="ruby-identifier">dir</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">dir</span>)
@@ -707,7 +724,7 @@
 
           
           <div class="method-source-code" id="url_for-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 275</span>
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer/util.rb, line 289</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">url</span>, <span class="ruby-identifier">sec</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">opt</span> = {})
   <span class="ruby-identifier">sec</span> <span class="ruby-operator">?</span> <span class="ruby-constant">Apache</span><span class="ruby-operator">::</span><span class="ruby-constant">SecureDownload</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span>.<span class="ruby-identifier">secure_url</span>(<span class="ruby-identifier">sec</span>, <span class="ruby-identifier">url</span>, <span class="ruby-identifier">opt</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">url</span>
 <span class="ruby-keyword">end</span></pre>
@@ -730,7 +747,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

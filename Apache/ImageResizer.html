@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>Class: Apache::ImageResizer</title>
+<title>class Apache::ImageResizer - apache_image_resizer Application documentation (v0.0.6)</title>
 
 <link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
 
@@ -161,50 +161,6 @@
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
-
-    
-      <div id="method-c-new" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">new</span><span
-            class="method-args">(options = {})</span>
-          <span class="method-click-advice">click to toggle source</span>
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>Creates a new RubyHandler instance for the <a
-href="../Apache.html">Apache</a> web server. It is to be installed as a
-custom 404 ErrorDocument handler.</p>
-          
-
-          
-          <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/apache/image_resizer.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {})
-  <span class="ruby-ivar">@verbosity</span>   = <span class="ruby-identifier">options</span>[<span class="ruby-value">:verbosity</span>]   <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_VERBOSITY</span>
-  <span class="ruby-ivar">@max_dim</span>     = <span class="ruby-identifier">options</span>[<span class="ruby-value">:max_dim</span>]     <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_MAX_DIM</span>
-  <span class="ruby-ivar">@prefix_re</span>   = <span class="ruby-identifier">options</span>[<span class="ruby-value">:prefix_re</span>]   <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_PREFIX_RE</span>
-  <span class="ruby-ivar">@source_dir</span>  = <span class="ruby-identifier">options</span>[<span class="ruby-value">:source_dir</span>]  <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_SOURCE_DIR</span>
-  <span class="ruby-ivar">@proxy_cache</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:proxy_cache</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_PROXY_CACHE</span>
-  <span class="ruby-ivar">@enlarge</span>     = <span class="ruby-identifier">options</span>[<span class="ruby-value">:enlarge</span>]
-  <span class="ruby-ivar">@secret</span>      = <span class="ruby-identifier">options</span>[<span class="ruby-value">:secret</span>]
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- new-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- new-method -->
-
-    
-    </section><!-- public-class-method-details -->
-  
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
       <h3 class="section-header">Public Instance Methods</h3>
 
@@ -273,6 +229,50 @@ no matching resource could be found, the original error will be thrown.</p>
     
     </section><!-- public-instance-method-details -->
   
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(options = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new RubyHandler instance for the <a
+href="../Apache.html">Apache</a> web server. It is to be installed as a
+custom 404 ErrorDocument handler.</p>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/apache/image_resizer.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-ivar">@verbosity</span>   = <span class="ruby-identifier">options</span>[<span class="ruby-value">:verbosity</span>]   <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_VERBOSITY</span>
+  <span class="ruby-ivar">@max_dim</span>     = <span class="ruby-identifier">options</span>[<span class="ruby-value">:max_dim</span>]     <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_MAX_DIM</span>
+  <span class="ruby-ivar">@prefix_re</span>   = <span class="ruby-identifier">options</span>[<span class="ruby-value">:prefix_re</span>]   <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_PREFIX_RE</span>
+  <span class="ruby-ivar">@source_dir</span>  = <span class="ruby-identifier">options</span>[<span class="ruby-value">:source_dir</span>]  <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_SOURCE_DIR</span>
+  <span class="ruby-ivar">@proxy_cache</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:proxy_cache</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_PROXY_CACHE</span>
+  <span class="ruby-ivar">@enlarge</span>     = <span class="ruby-identifier">options</span>[<span class="ruby-value">:enlarge</span>]
+  <span class="ruby-ivar">@secret</span>      = <span class="ruby-identifier">options</span>[<span class="ruby-value">:secret</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
   </section><!-- 5Buntitled-5D -->
 
 </div><!-- documentation -->
@@ -280,7 +280,7 @@ no matching resource could be found, the original error will be thrown.</p>
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 

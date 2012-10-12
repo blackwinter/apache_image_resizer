@@ -96,7 +96,7 @@ module Apache
           )
         ){1,2}
         /
-      }x
+      }xo
 
       PROXY_RE = %r{\Aproxy:}
 
@@ -240,6 +240,9 @@ module Apache
         mkdir_for(target)
 
         if link
+          source = File.expand_path(File.readlink(source),
+            File.dirname(source)) if File.symlink?(source)
+
           if system('ln', source, target)
             return img
           elsif block

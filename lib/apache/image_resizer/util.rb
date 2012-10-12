@@ -3,9 +3,9 @@
 #                                                                             #
 # A component of apache_image_resizer.                                        #
 #                                                                             #
-# Copyright (C) 2011 University of Cologne,                                   #
-#                    Albertus-Magnus-Platz,                                   #
-#                    50923 Cologne, Germany                                   #
+# Copyright (C) 2011-2012 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50923 Cologne, Germany                              #
 #                                                                             #
 # Authors:                                                                    #
 #     Jens Wille <jens.wille@uni-koeln.de>                                    #

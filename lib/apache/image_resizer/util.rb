@@ -243,7 +243,7 @@ module Apache
           source = File.expand_path(File.readlink(source),
             File.dirname(source)) if File.symlink?(source)
 
-          if system('ln', source, target)
+          if system('ln', source.untaint, target)
             return img
           elsif block
             block['Link error: %s' % $?.exitstatus]

@@ -1,8 +1,8 @@
-Fri, 02 Nov 2012 16:03:52 +0100
-README	Fri, 02 Nov 2012 14:58:00 +0100
-COPYING	Tue, 11 Oct 2011 13:46:08 +0200
-ChangeLog	Tue, 11 Oct 2011 13:45:53 +0200
-lib/apache/image_resizer.rb	Wed, 02 Nov 2011 17:32:57 +0100
-lib/apache/mock_constants.rb	Fri, 21 Oct 2011 14:55:30 +0200
-lib/apache/image_resizer/util.rb	Fri, 12 Oct 2012 11:51:15 +0200
-lib/apache/image_resizer/version.rb	Fri, 02 Nov 2012 14:58:11 +0100
+Tue, 09 Apr 2013 13:13:06 +0200
+README	Tue, 09 Apr 2013 13:11:36 +0200
+COPYING	Tue, 09 Apr 2013 11:29:21 +0200
+ChangeLog	Tue, 09 Apr 2013 11:29:21 +0200
+lib/apache/image_resizer.rb	Tue, 09 Apr 2013 13:12:21 +0200
+lib/apache/mock_constants.rb	Tue, 09 Apr 2013 11:29:21 +0200
+lib/apache/image_resizer/util.rb	Tue, 09 Apr 2013 13:12:35 +0200
+lib/apache/image_resizer/version.rb	Tue, 09 Apr 2013 11:29:21 +0200

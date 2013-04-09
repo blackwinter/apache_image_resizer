@@ -9,7 +9,7 @@ begin
       :version      => Apache::ImageResizer::VERSION,
       :summary      => %q{Apache module providing image resizing functionality.},
       :author       => %q{Jens Wille},
-      :email        => %q{jens.wille@uni-koeln.de},
+      :email        => %q{jens.wille@gmail.com},
       :homepage     => :blackwinter,
       :dependencies => %w[rmagick ruby-filemagic ruby-nuggets apache_secure_download]
     }

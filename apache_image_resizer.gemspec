@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.authors = ["Jens Wille"]
   s.date = "2012-11-02"
   s.description = "Apache module providing image resizing functionality."
-  s.email = "jens.wille@uni-koeln.de"
+  s.email = "jens.wille@gmail.com"
   s.extra_rdoc_files = ["README", "COPYING", "ChangeLog"]
   s.files = ["lib/apache/image_resizer/version.rb", "lib/apache/image_resizer/util.rb", "lib/apache/image_resizer.rb", "lib/apache/mock_constants.rb", "COPYING", "ChangeLog", "Rakefile", "README", "spec/spec_helper.rb", "spec/apache/image_resizer/util_spec.rb", "spec/apache/image_resizer_spec.rb", ".rspec"]
   s.homepage = "http://github.com/blackwinter/apache_image_resizer"

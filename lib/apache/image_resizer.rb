@@ -4,12 +4,14 @@
 # apache_image_resizer -- Apache module providing upload merging              #
 #                         functionality                                       #
 #                                                                             #
-# Copyright (C) 2011 University of Cologne,                                   #
-#                    Albertus-Magnus-Platz,                                   #
-#                    50923 Cologne, Germany                                   #
+# Copyright (C) 2011-2012 University of Cologne,                              #
+#                         Albertus-Magnus-Platz,                              #
+#                         50923 Cologne, Germany                              #
+#                                                                             #
+# Copyright (C) 2013 Jens Wille                                               #
 #                                                                             #
 # Authors:                                                                    #
-#     Jens Wille <jens.wille@uni-koeln.de>                                    #
+#     Jens Wille <jens.wille@gmail.com>                                       #
 #                                                                             #
 # apache_image_resizer is free software: you can redistribute it and/or       #
 # modify it under the terms of the GNU Affero General Public License as       #

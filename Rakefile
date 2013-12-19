@@ -10,7 +10,7 @@ begin
       :summary      => %q{Apache module providing image resizing functionality.},
       :author       => %q{Jens Wille},
       :email        => %q{jens.wille@gmail.com},
-      :license      => %q{AGPL},
+      :license      => %q{AGPL-3.0},
       :homepage     => :blackwinter,
       :dependencies => %w[rmagick ruby-filemagic ruby-nuggets apache_secure_download]
     }

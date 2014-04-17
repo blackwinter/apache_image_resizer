@@ -87,7 +87,7 @@ describe Apache::ImageResizer do
     end
 
     def mock_request(&block)
-      @request = mock('Request')
+      @request = double('Request')
 
       instance_eval(&block) if block
 
@@ -115,7 +115,7 @@ describe Apache::ImageResizer do
     end
 
     def mock_image(source, target, format, fail_write = false, fail_resize = false)
-      img = mock('Image')
+      img = double('Image')
       Magick::Image.should_receive(:read).with(source).once.and_return([img])
 
       img.should_receive(:columns).with(no_args).once.and_return(123)

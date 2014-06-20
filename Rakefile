@@ -12,7 +12,7 @@ begin
       :email        => %q{jens.wille@gmail.com},
       :license      => %q{AGPL-3.0},
       :homepage     => :blackwinter,
-      :dependencies => %w[rmagick ruby-filemagic ruby-nuggets apache_secure_download]
+      :dependencies => %w[rmagick ruby-filemagic nuggets apache_secure_download]
     }
   }}
 rescue LoadError => err

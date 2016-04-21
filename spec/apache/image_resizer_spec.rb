@@ -6,7 +6,7 @@ describe Apache::ImageResizer do
     @base = '/base'
     @uri  = @base + '/prefix/%s/path'
 
-    @handler = described_class.new(:verbosity => -1)
+    @handler = described_class.new(verbosity: -1)
   end
 
   describe '#handler' do
@@ -111,7 +111,7 @@ describe Apache::ImageResizer do
         when :orig then @uri % 'original'
         when :base then @base
         else            uri
-      end).once.and_return(OpenStruct.new(:status => Apache::HTTP_OK, :filename => path))
+      end).once.and_return(OpenStruct.new(status: Apache::HTTP_OK, filename: path))
     end
 
     def mock_image(source, target, format, fail_write = false, fail_resize = false)

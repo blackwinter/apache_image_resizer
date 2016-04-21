@@ -70,13 +70,13 @@ module Apache
 
       return DECLINED unless path
 
-      log(2) {{ :Base => base, :Prefix => prefix, :Dir => dir, :Path => path }}
+      log(2) {{ Base: base, Prefix: prefix, Dir: dir, Path: path }}
 
       source, target = get_paths(request, path, base,
         prefix, @source_dir, dir, @proxy_cache, @secret)
 
       if source
-        log(2) {{ :Source => source, :Target => target, :Directives => directives }}
+        log(2) {{ Source: source, Target: target, Directives: directives }}
         return DECLINED unless img = resize(source, target, directives, @enlarge, &block)
       end
 
